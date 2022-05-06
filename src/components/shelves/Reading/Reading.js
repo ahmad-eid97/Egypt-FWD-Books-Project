@@ -1,6 +1,43 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+
+import { getAll } from '../../../BooksApi';
+
+import Book from '../../Book/Book';
+
+import './reading.css'
 
 const Reading = () => {
+  // COMPONENT HOOKS
+  const [books, setBooks] = useState([])
+
+  const fetchAllBooks = async() => {
+
+    const allBooks = await getAll();
+
+    console.log(allBooks)
+
+    let currentlyReadingBooks = []
+
+    allBooks.forEach(book => {
+
+      if(book.shelf === 'currentlyReading') {
+
+        currentlyReadingBooks.push(book)
+
+      }
+
+    })
+
+    setBooks(currentlyReadingBooks)
+
+  }
+
+  useEffect(() => {
+
+    fetchAllBooks()
+
+  }, [])
+
   return (
     <div className="reading">
 
@@ -12,7 +49,15 @@ const Reading = () => {
 
       <div className="reading__books">
 
-        <h3>this is books area</h3>
+        {books.map((book) => (
+
+          <div key={book.id} className="reading__books-book">
+
+            <Book book={book} />
+
+          </div>
+
+        ))}
 
       </div>
 

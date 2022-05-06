@@ -1,0 +1,32 @@
+.reading .reading__head {
+  margin-top: 50px;
+  margin-bottom: 70px;
+}
+
+.reading .reading__books {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: start;
+  justify-content: center;
+}
+
+.reading .reading__books .reading__books-book {
+  grid-column: span 3;
+  max-width: 300px;
+  margin: 0 20px;
+}
+
+.reading .reading__books .reading__books-book img {
+  height: 250px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.reading .reading__books .reading__books-book h4 {
+  margin: 20px 0 10px;
+  font-size: 18px;
+}
+
+.reading .reading__books .reading__books-book p {
+  margin: 0;
+  opacity: 0.8;
+}
