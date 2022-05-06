@@ -1,0 +1,12 @@
+.shelves .shelves__head {
+  background-color: #487eb0;
+  padding: 15px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.shelves .shelves__head h1 {
+  color: #fff;
+  font-weight: 500;
+  font-size: 40px;
+  margin: 0;
+}
