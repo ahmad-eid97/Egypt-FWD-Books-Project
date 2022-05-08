@@ -1,0 +1,27 @@
+.shelf .shelf__head {
+  margin-top: 50px;
+  margin-bottom: 70px;
+}
+
+.shelf .shelf__books {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: start;
+  justify-content: center;
+}
+
+.shelf .shelf__books .shelf__books-book {
+  grid-column: span 3;
+  max-width: 300px;
+  margin: 0 20px;
+}
+
+.shelf .shelf__books .shelf__books-book h4 {
+  margin: 20px 0 10px;
+  font-size: 18px;
+}
+
+.shelf .shelf__books .shelf__books-book p {
+  margin: 0;
+  opacity: 0.8;
+}

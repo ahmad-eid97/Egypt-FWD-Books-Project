@@ -1,3 +1,7 @@
+.shelves {
+  padding-bottom: 100px;
+}
+
 .shelves .shelves__head {
   background-color: #487eb0;
   padding: 15px;
@@ -9,4 +13,23 @@
   font-weight: 500;
   font-size: 40px;
   margin: 0;
+}
+
+.shelves .shelves__search-page {
+  position: fixed;
+  bottom: 5%;
+  right: 3%;
+  width: 70px;
+  height: 70px;
+  background-color: #487EB0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  cursor: pointer;
+}
+
+.shelves .shelves__search-page img {
+  width: 50%;
 }

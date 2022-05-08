@@ -1,12 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-import Reading from '../../components/shelves/Reading/Reading';
-import WantToRead from '../../components/shelves/WantToRead/WantToRead';
-import Read from '../../components/shelves/Read/Read';
+import { getAll } from '../../BooksApi';
+
+import Shelf from '../../components/Shelf/Shelf';
 
 import './shelves.css';
 
 const Shelves = () => {
+  // COMPONENT HOOKS
+  const [currentlyReadingBooks, setCurrentlyReadingBooks] = useState([])
+  const [wantToReadBooks, setWantToReadBooks] = useState([])
+  const [readBooks, setReadBooks] = useState([])
+
+  const fetchAllBooks = async() => {
+
+    const allBooks = await getAll();
+
+    console.log(allBooks)
+
+    const currentBooks = allBooks.filter((book) => {
+      return book.shelf === 'currentlyReading'
+    })
+
+    setCurrentlyReadingBooks(currentBooks)
+
+    const wantBooks = allBooks.filter((book) => {
+      return book.shelf === 'wantToRead'
+    })
+
+    setWantToReadBooks(wantBooks)
+
+    const readBooks = allBooks.filter((book) => {
+      return book.shelf === 'read'
+    })
+
+    setReadBooks(readBooks)
+
+  }
+
+  useEffect(() => {
+
+    fetchAllBooks()
+
+  }, [])
+
   return (
     <div className="shelves">
 
@@ -18,21 +56,29 @@ const Shelves = () => {
 
       <div className="shelves__currently-reading">
 
-        <Reading />
+        <Shelf title="Currently Reading" books={currentlyReadingBooks} />
 
       </div>
 
       <div className="shelves__want-to-read">
 
-        <WantToRead />
+        <Shelf title="Want To Read" books={wantToReadBooks} />
 
       </div>
 
       <div className="shelves__read">
 
-        <Read />
+        <Shelf title="Read" books={readBooks} />
 
       </div>
+
+      <Link to='/search'>
+
+        <span className='shelves__search-page'>
+          <img src="/assets/imgs/add.svg" alt="addIcon" />
+        </span>
+
+      </Link>
 
     </div>
   )
