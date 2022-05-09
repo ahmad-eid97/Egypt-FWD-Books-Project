@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getAll } from '../../BooksApi';
+import { getAll, update } from '../../BooksApi';
 
 import Shelf from '../../components/Shelf/Shelf';
 
@@ -19,19 +19,19 @@ const Shelves = () => {
 
     console.log(allBooks)
 
-    const currentBooks = allBooks.filter((book) => {
+    const currentBooks = allBooks.filter(book => {
       return book.shelf === 'currentlyReading'
     })
 
     setCurrentlyReadingBooks(currentBooks)
 
-    const wantBooks = allBooks.filter((book) => {
+    const wantBooks = allBooks.filter(book => {
       return book.shelf === 'wantToRead'
     })
 
     setWantToReadBooks(wantBooks)
 
-    const readBooks = allBooks.filter((book) => {
+    const readBooks = allBooks.filter(book => {
       return book.shelf === 'read'
     })
 
@@ -45,6 +45,12 @@ const Shelves = () => {
 
   }, [])
 
+  // COMPONENT HANDLERS
+  const changeShelf = async (selectedShelf, book) => {
+    await update(book, selectedShelf)
+    fetchAllBooks()
+  }
+
   return (
     <div className="shelves">
 
@@ -56,19 +62,19 @@ const Shelves = () => {
 
       <div className="shelves__currently-reading">
 
-        <Shelf title="Currently Reading" books={currentlyReadingBooks} />
+        <Shelf title="Currently Reading" books={currentlyReadingBooks} changeShelf={changeShelf} />
 
       </div>
 
       <div className="shelves__want-to-read">
 
-        <Shelf title="Want To Read" books={wantToReadBooks} />
+        <Shelf title="Want To Read" books={wantToReadBooks} changeShelf={changeShelf} />
 
       </div>
 
       <div className="shelves__read">
 
-        <Shelf title="Read" books={readBooks} />
+        <Shelf title="Read" books={readBooks} changeShelf={changeShelf} />
 
       </div>
 

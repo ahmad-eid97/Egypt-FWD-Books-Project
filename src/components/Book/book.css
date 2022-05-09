@@ -1,7 +1,7 @@
 .book .book__image {
   position: relative;
-  width: 200px;
-  height: 250px;
+  width: 220px;
+  height: 270px;
   margin: auto;
 }
 
@@ -23,12 +23,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .book .book__image .book__image-select img {
   position: absolute;
   width: 25px;
   height: 25px;
+  object-fit: contain;
 }
 
 .book .book__image .book__image-select select {
@@ -36,3 +38,19 @@
   height: 60px;
   width: 60px;
 }
+
+.book h4 {
+  margin-bottom: 0;
+}
+
+.book h4, p {
+  width: 200px;
+  text-align: left;
+}
+
+.book p {
+  margin-bottom: 50px;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+

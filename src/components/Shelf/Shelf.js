@@ -2,9 +2,18 @@ import React from 'react';
 
 import Book from '../Book/Book';
 
+import PropTypes from 'prop-types';
+
 import './shelf.css'
 
-const Shelf = ({ title, books }) => {
+const Shelf = ({ title, books, changeShelf }) => {
+
+  // CHECK VALIDITY OFF PROPS TYPES
+  Shelf.propTypes = {
+    title: PropTypes.string.isRequired,
+    books: PropTypes.array.isRequired,
+    changeShelf: PropTypes.func.isRequired
+  }
 
   return (
     <div className="shelf">
@@ -21,7 +30,7 @@ const Shelf = ({ title, books }) => {
 
           <div key={book.id} className="shelf__books-book">
 
-            <Book book={book} />
+            <Book book={book} changeShelf={changeShelf} />
 
           </div>
 
