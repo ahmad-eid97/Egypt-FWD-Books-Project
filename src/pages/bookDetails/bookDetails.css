@@ -1,0 +1,74 @@
+.loading {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.bookDetails {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.bookDetails .bookDetails__area {
+  width: 1000px;
+  height: 650px;
+  background-color: rgb(236, 236, 236);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  overflow: hidden;
+  padding: 0 40px 0 0;
+}
+
+.bookDetails .bookDetails__area .bookDetails__area-image {
+  grid-column: span 2;
+}
+
+.bookDetails .bookDetails__area .bookDetails__area-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.bookDetails .bookDetails__area .bookDetails__area-details {
+  grid-column: span 3;
+  text-align: left;
+}
+
+.bookDetails .bookDetails__area .bookDetails__area-details h1 {
+  margin-bottom: 0px;
+}
+
+.bookDetails .bookDetails__area .bookDetails__area-details h4 {
+  margin: 10px 0  ;
+}
+
+.bookDetails .bookDetails__area .bookDetails__area-details p {
+  margin: 5px 0;
+  width: 100%;
+}
+
+.bookDetails .bookDetails__area .bookDetails__area-details span {
+  color: red;
+}
+
+.bookDetails .bookDetails__area .bookDetails__area-details button {
+  width: 150px;
+  height: 40px;
+  margin-top: 10px;
+  background-color: #487EB0;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid #487EB0;
+  cursor: pointer;
+}
+
+.bookDetails .bookDetails__area .bookDetails__area-details button:hover {
+  background-color: transparent;
+  border-color: #487EB0;
+  color: #487EB0;
+}

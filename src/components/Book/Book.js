@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import './book.css';
+import { Link } from 'react-router-dom';
 
 const Book = ({ book, changeShelf }) => {
 
@@ -60,6 +61,16 @@ const Book = ({ book, changeShelf }) => {
           </select>
 
         </div>
+
+        <Link to={`/book/${book.id}`}>
+
+          <span className="book__preview">
+
+            <img src="/assets/imgs/eye.png" alt="eyeImage" />
+
+          </span>
+
+        </Link>
 
       </div>
 
