@@ -23,8 +23,18 @@ const Book = ({ book, changeShelf }) => {
     changeShelf(selectedShelf, book)
   }
 
+  const drag = (e) => {
+    e.target.classList.add('dragging')
+    e.target.id = `${book.id}`
+  }
+
+  const dragEnd = (e) => {
+    e.target.classList.remove('dragging');
+    e.target.removeAttribute('id')
+  }
+
   return (
-    <div className="book">
+    <div className="book" draggable="true" onDrag={(e) => drag(e)} onDragEnd={(e) => dragEnd(e)}>
 
       <div className="book__image">
 

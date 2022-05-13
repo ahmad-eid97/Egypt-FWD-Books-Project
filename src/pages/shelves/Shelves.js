@@ -7,7 +7,7 @@ import Shelf from '../../components/Shelf/Shelf';
 
 import './shelves.css';
 
-const Shelves = () => {
+const Shelves = ({ logout }) => {
   // COMPONENT HOOKS
   const [currentlyReadingBooks, setCurrentlyReadingBooks] = useState([])
   const [wantToReadBooks, setWantToReadBooks] = useState([])
@@ -58,23 +58,27 @@ const Shelves = () => {
 
         <h1>My Reads</h1>
 
+        <button onClick={logout}>
+          Logout
+        </button>
+
       </div>
 
       <div className="shelves__currently-reading">
 
-        <Shelf title="Currently Reading" books={currentlyReadingBooks} changeShelf={changeShelf} />
+        <Shelf title="Currently Reading" books={currentlyReadingBooks} changeShelf={changeShelf} shelf="currentlyReading" />
 
       </div>
 
       <div className="shelves__want-to-read">
 
-        <Shelf title="Want To Read" books={wantToReadBooks} changeShelf={changeShelf} />
+        <Shelf title="Want To Read" books={wantToReadBooks} changeShelf={changeShelf} shelf="wantToRead" />
 
       </div>
 
       <div className="shelves__read">
 
-        <Shelf title="Read" books={readBooks} changeShelf={changeShelf} />
+        <Shelf title="Read" books={readBooks} changeShelf={changeShelf}shelf="read" />
 
       </div>
 
