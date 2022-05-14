@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import './signup.css'
 
@@ -9,11 +10,15 @@ const Signup = ({ signup }) => {
 
   // COMPONENT HANDLERS
   const signupHandler = async() => {
-    const signupData = {
-      email,
-      password
+    if(email && password) {
+      const signupData = {
+        email,
+        password
+      }
+      signup(signupData)
+    } else {
+      alert("Fields can't be empty!")
     }
-    signup(signupData)
   }
 
   return (
@@ -23,7 +28,7 @@ const Signup = ({ signup }) => {
 
         <div className="wrapper">
 
-          <h1>signup</h1>
+          <h1>Signup</h1>
 
           <input 
             type="email" 
@@ -46,6 +51,8 @@ const Signup = ({ signup }) => {
           </button>
 
         </div>
+
+        <p>Already have an account !? <Link to="/login">Login</Link></p>
 
       </div>
 

@@ -53,10 +53,22 @@ const Book = ({ book, changeShelf }) => {
           <img src="/assets/imgs/menu.png" alt="menuIcon" />
 
           <select value={newShelf} onChange={(e) => updateShelf(e.target.value, book)} style={{ opacity: '0' }} ref={selectRef}>
+
+            {console.log(newShelf)}
             
-            <option value="none" disabled>
-              Move to...
-            </option>
+            {newShelf !== 'none' ?
+
+              <option value="none" disabled>
+                Move to...
+              </option>
+
+              :
+
+              <option value="none" disabled>
+                add to...
+              </option>
+          
+            }
 
             <option value="currentlyReading">
               Currently Reading
@@ -66,7 +78,11 @@ const Book = ({ book, changeShelf }) => {
 
             <option value="read">Read</option>
 
-            <option value="none">None</option>
+            {newShelf !== 'none' &&
+
+              <option value="none">None</option>
+            
+            }
 
           </select>
 

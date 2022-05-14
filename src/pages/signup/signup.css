@@ -44,3 +44,13 @@
   color: #fff;
   border: 1px solid #fff;
 }
+
+.signup .signup__box p {
+  color: #fff;
+  width: 100%;
+  text-align: center;
+}
+
+.signup .signup__box p a {
+  color: #fff;
+}

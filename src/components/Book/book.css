@@ -3,7 +3,7 @@
   cursor: grab;
 }
 
-#draging {
+.dragging {
   display: none;
 }
 

@@ -44,3 +44,13 @@
   color: #fff;
   border: 1px solid #fff;
 }
+
+.login .login__box p {
+  color: #fff;
+  width: 100%;
+  text-align: center;
+}
+
+.login .login__box p a {
+  color: #fff;
+}

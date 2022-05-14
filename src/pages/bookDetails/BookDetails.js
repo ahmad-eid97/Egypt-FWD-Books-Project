@@ -38,7 +38,15 @@ const BookDetails = () => {
         
         <div className="bookDetails__area-image">
 
-          <img src={book.imageLinks.thumbnail} alt="bookImage" />
+          {book.imageLinks ? 
+
+            <img src={book.imageLinks.thumbnail} alt="book-thumbnail" />
+
+            :
+
+            <img src="/assets/imgs/default.jpg" alt="book-thumbnail" />
+
+          }
 
         </div>
         
@@ -52,13 +60,17 @@ const BookDetails = () => {
           <p>Book is {book.pageCount} pages</p>
 
           <h4>Authors: </h4>
-          {book.authors.length >= 1 ? 
+
+          {console.log(book.authors)}
+          {console.log(book.description)}
+
+          {book.authors ? 
           
             <p>{book.authors.join(',')}</p>
 
             :
 
-            <p>...</p>
+            <p>Not Mentioned</p>
             
           }
 
@@ -70,7 +82,15 @@ const BookDetails = () => {
 
           <h4>Description: </h4>
 
-          <p>{book.description.substring(0, 800) + '...'}</p>
+          {book.description ?
+          
+            <p>{book.description.substring(0, 800) + '...'}</p>
+
+            :
+
+            <p>This book has no description</p>
+        
+          }
 
           <button onClick={() => navigate(-1)}>Go Back</button>
 

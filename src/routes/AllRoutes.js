@@ -13,7 +13,7 @@ import { Routes, Route } from 'react-router-dom';
 const AllRoutes = () => {
   // COMPONENT HOOKS
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('booksLogin') || null))
-  const [authAccounts, setAuthAccounts] = useState(JSON.parse(localStorage.getItem('booksAuthData') || null))
+  const [authAccounts, setAuthAccounts] = useState(JSON.parse(localStorage.getItem('booksAuthData')) || [])
   const navigate = useNavigate()
 
   const signup = (signupData) => {
@@ -38,7 +38,13 @@ const AllRoutes = () => {
 
           localStorage.setItem('booksAuthData', JSON.stringify(accounts))
 
-          navigate('/login')
+          setAuthAccounts(accounts)
+
+          localStorage.setItem('booksLogin', JSON.stringify(signupData))
+      
+          setUser(signupData)
+
+          navigate('/')
 
         }
 
@@ -50,30 +56,46 @@ const AllRoutes = () => {
 
       localStorage.setItem('booksAuthData', JSON.stringify(accounts))
 
-      navigate('/login')
+      setAuthAccounts(accounts)
+
+      localStorage.setItem('booksLogin', JSON.stringify(signupData))
+      
+      setUser(signupData)
+
+      navigate('/')
 
     }
   }
 
   const login = (loginData) => {
     // CHECK IF ACCOUNT EXISTS...
-    authAccounts.forEach(account => {
+    if(authAccounts.length) {
 
-      if(account.email === loginData.email && account.password === loginData.password) {
+      console.log('here')
 
-        localStorage.setItem('booksLogin', JSON.stringify(loginData))
-    
-        setUser(loginData)
-    
-        navigate('/')
+      authAccounts.forEach(account => {
 
-      } else {
+        if(account.email === loginData.email && account.password === loginData.password) {
+  
+          localStorage.setItem('booksLogin', JSON.stringify(loginData))
+      
+          setUser(loginData)
+      
+          navigate('/')
+  
+        } else {
+  
+          alert('Wrong Credentials')
+  
+        }
+  
+      })
 
-        alert('Wrong Credentials')
+    } else {
 
-      }
+      alert('User Not Found!')
 
-    })
+    }
 
   }
 
