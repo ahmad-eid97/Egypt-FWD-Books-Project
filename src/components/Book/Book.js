@@ -19,18 +19,27 @@ const Book = ({ book, changeShelf }) => {
 
   // COMPONENT HANDLERS
   const updateShelf = (selectedShelf, book) => {
+
     setNewShelf(selectedShelf)
+
     changeShelf(selectedShelf, book)
+
   }
 
   const drag = (e) => {
+
     e.target.classList.add('dragging')
+
     e.target.id = `${book.id}`
+
   }
 
   const dragEnd = (e) => {
-    e.target.classList.remove('dragging');
-    e.target.removeAttribute('id')
+
+    // e.target.classList.remove('dragging');
+
+    e.target.removeAttribute('id');
+
   }
 
   return (
@@ -53,8 +62,6 @@ const Book = ({ book, changeShelf }) => {
           <img src="/assets/imgs/menu.png" alt="menuIcon" />
 
           <select value={newShelf} onChange={(e) => updateShelf(e.target.value, book)} style={{ opacity: '0' }} ref={selectRef}>
-
-            {console.log(newShelf)}
             
             {newShelf !== 'none' ?
 

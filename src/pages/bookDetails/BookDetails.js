@@ -12,15 +12,21 @@ const BookDetails = () => {
   const [book, setBook] = useState()
 
   const fetchBook = async() => {
+
     const book = await get(bookId);
+
     if(book) {
+
       setBook(book)
+
     }
-    console.log(book)
+
   }
 
   useEffect(() => {
+
     fetchBook()
+    
   }, [])
 
   if(!book) {
@@ -40,7 +46,7 @@ const BookDetails = () => {
 
           {book.imageLinks ? 
 
-            <img src={book.imageLinks.thumbnail} alt="book-thumbnail" />
+            <img src={book.imageLinks.smallThumbnail} alt="book-thumbnail" />
 
             :
 
@@ -60,9 +66,6 @@ const BookDetails = () => {
           <p>Book is {book.pageCount} pages</p>
 
           <h4>Authors: </h4>
-
-          {console.log(book.authors)}
-          {console.log(book.description)}
 
           {book.authors ? 
           

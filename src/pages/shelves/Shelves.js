@@ -9,34 +9,15 @@ import './shelves.css';
 
 const Shelves = ({ logout }) => {
   // COMPONENT HOOKS
-  const [currentlyReadingBooks, setCurrentlyReadingBooks] = useState([])
-  const [wantToReadBooks, setWantToReadBooks] = useState([])
-  const [readBooks, setReadBooks] = useState([])
+  const [allBooks, setAllBooks] = useState([])
 
+  // FETCH ALL BOOKS
   const fetchAllBooks = async() => {
 
-    const allBooks = await getAll();
+    const books = await getAll();
 
-    console.log(allBooks)
-
-    const currentBooks = allBooks.filter(book => {
-      return book.shelf === 'currentlyReading'
-    })
-
-    setCurrentlyReadingBooks(currentBooks)
-
-    const wantBooks = allBooks.filter(book => {
-      return book.shelf === 'wantToRead'
-    })
-
-    setWantToReadBooks(wantBooks)
-
-    const readBooks = allBooks.filter(book => {
-      return book.shelf === 'read'
-    })
-
-    setReadBooks(readBooks)
-
+    setAllBooks(books)
+    
   }
 
   useEffect(() => {
@@ -47,8 +28,21 @@ const Shelves = ({ logout }) => {
 
   // COMPONENT HANDLERS
   const changeShelf = async (selectedShelf, book) => {
+
     await update(book, selectedShelf)
-    fetchAllBooks()
+
+    let allFetchedBooks = [...allBooks]
+
+    let updatedBook = allFetchedBooks.find(bookIn => bookIn.id === book.id);
+
+    updatedBook.shelf = selectedShelf;
+
+    const bookFound = allFetchedBooks.findIndex(bookFound => bookFound.id === updatedBook.id);
+
+    if(bookFound >= -1) allFetchedBooks.splice(bookFound, 1, updatedBook)
+
+    setAllBooks(allFetchedBooks)
+
   }
 
   return (
@@ -64,28 +58,42 @@ const Shelves = ({ logout }) => {
 
       </div>
 
+      <div className="notes">
+
+        <h2>Notes:</h2>
+
+        <p>You have auth functionalities which you can create new account and login to see your shelved books...</p>
+
+        <p>You have eye icon that navigates you to book details page...</p>
+
+        <p>You can drag and drop books amoung shelves...</p>
+
+      </div>
+
       <div className="shelves__currently-reading">
 
-        <Shelf title="Currently Reading" books={currentlyReadingBooks} changeShelf={changeShelf} shelf="currentlyReading" />
+        <Shelf title="Currently Reading" books={allBooks.filter(book => book.shelf === 'currentlyReading')} changeShelf={changeShelf} shelf="currentlyReading" />
 
       </div>
 
       <div className="shelves__want-to-read">
 
-        <Shelf title="Want To Read" books={wantToReadBooks} changeShelf={changeShelf} shelf="wantToRead" />
+        <Shelf title="Want To Read" books={allBooks.filter(book => book.shelf === 'wantToRead')} changeShelf={changeShelf} shelf="wantToRead" />
 
       </div>
 
       <div className="shelves__read">
 
-        <Shelf title="Read" books={readBooks} changeShelf={changeShelf}shelf="read" />
+        <Shelf title="Read" books={allBooks.filter(book => book.shelf === 'read')} changeShelf={changeShelf}shelf="read" />
 
       </div>
 
       <Link to='/search'>
 
         <span className='shelves__search-page'>
+
           <img src="/assets/imgs/add.svg" alt="addIcon" />
+          
         </span>
 
       </Link>

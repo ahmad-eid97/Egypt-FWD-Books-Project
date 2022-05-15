@@ -21,18 +21,18 @@ const Shelf = ({ title, books, changeShelf, shelf }) => {
 
     e.preventDefault()
 
-    if(e.target.classList.contains('shelf__books')) {
+    const newBook = document.querySelector('.dragging');
 
-      const newBook = document.querySelector('.dragging');
+    const bookId = newBook.id;
 
-      const bookId = newBook.id;
+    const book = await get(bookId)
 
-      const book = await get(bookId)
+    changeShelf(shelf, book).then(() => {
 
-      changeShelf(shelf, book)
+      newBook.classList.remove('dragging')
 
-      // e.target.appendChild(newBook)
-    }
+    })
+    
   }
 
   const dragOver = (e) => {

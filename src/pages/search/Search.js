@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { search, update } from '../../BooksApi';
+import { search, update, getAll } from '../../BooksApi';
 
 import Book from './../../components/Book/Book';
 
@@ -10,30 +10,65 @@ import './search.css';
 const Search = () => {
   // COMPONENT HOOKS
   const [searchQuery, setSearchQuery] = useState('')
-  const [books, setBooks] = useState([])
+  const [booksHaveShelves, setBooksHaveShelves] = useState([])
+  const [viewedBooks, setViewedBooks] = useState([])
 
-  console.log(books)
+  const fetchShelvedBooks = async() => {
+
+    const shelvedBooks = await getAll()
+
+    setBooksHaveShelves(shelvedBooks)
+
+  }
+
+  useEffect(() => {
+
+    fetchShelvedBooks()
+
+  }, [])
 
   // COMPONENT HANDLERS
   const typing = async(e) => {
+
     setSearchQuery(e.target.value)
 
     if(e.target.value) {
 
       const searchedBooks = await search(e.target.value, 30)
 
-      setBooks(searchedBooks)
+      if(searchedBooks.length) {
 
-      console.log(books)
+        await searchedBooks.forEach(searchedBook => {
+
+          booksHaveShelves.forEach(bookHaveShelf => {
+  
+            if(searchedBook.id === bookHaveShelf.id) {
+  
+              searchedBook.shelf = bookHaveShelf.shelf
+  
+            }
+  
+          })
+  
+        })
+
+      }
+
+      setViewedBooks(searchedBooks)
+
     } else {
-      setBooks([])
+
+      setViewedBooks([])
+
     }
 
   }
 
   // WE HAVE NO REDUX HERE SO I HAVE TO PUT THIS FUNCTION HERE ALSO
   const changeShelf = (selectedShelf, book) => {
+
     update(book, selectedShelf)
+
   }
 
   return (
@@ -58,11 +93,11 @@ const Search = () => {
 
       <div className="searchResults">
 
-        {books.length ? 
+        {viewedBooks.length ? 
 
           <>
 
-            {books.map(book => (
+            {viewedBooks.map(book => (
 
               <div className="book" key={book.id}>
 
@@ -94,4 +129,4 @@ const Search = () => {
   )
 }
 
-export default Search
+export default Search;

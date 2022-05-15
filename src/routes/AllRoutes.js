@@ -71,8 +71,6 @@ const AllRoutes = () => {
     // CHECK IF ACCOUNT EXISTS...
     if(authAccounts.length) {
 
-      console.log('here')
-
       authAccounts.forEach(account => {
 
         if(account.email === loginData.email && account.password === loginData.password) {

@@ -4,10 +4,25 @@
 
 .shelves .shelves__head {
   background-color: #487eb0;
-  padding: 15px 100px;
+  padding: 15px 10%;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: space-between;
+}
+
+.shelves .notes {
+  padding: 10px 10% 20px;
+  text-align: left;
+  background-color: rgb(252, 252, 225);
+}
+
+.shelves .notes h2 {
+  margin-bottom: 10px;
+}
+
+.shelves .notes p {
+  width: 100%;
+  margin: 5px 0;
 }
 
 .shelves .shelves__head button {
