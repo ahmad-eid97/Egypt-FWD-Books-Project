@@ -11,23 +11,23 @@ const BookDetails = () => {
   const navigate = useNavigate()
   const [book, setBook] = useState()
 
-  const fetchBook = async() => {
-
-    const book = await get(bookId);
-
-    if(book) {
-
-      setBook(book)
-
-    }
-
-  }
-
   useEffect(() => {
+
+    const fetchBook = async() => {
+  
+      const book = await get(bookId);
+  
+      if(book) {
+  
+        setBook(book)
+  
+      }
+  
+    }
 
     fetchBook()
     
-  }, [])
+  }, [bookId])
 
   if(!book) {
     return (

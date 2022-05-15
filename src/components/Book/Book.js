@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
 import './book.css';
-import { Link } from 'react-router-dom';
 
 const Book = ({ book, changeShelf }) => {
 
@@ -35,8 +35,6 @@ const Book = ({ book, changeShelf }) => {
   }
 
   const dragEnd = (e) => {
-
-    // e.target.classList.remove('dragging');
 
     e.target.removeAttribute('id');
 

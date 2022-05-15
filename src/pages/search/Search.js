@@ -25,18 +25,18 @@ const Search = () => {
 
     fetchShelvedBooks()
 
-  }, [])
+  }, [booksHaveShelves])
 
   // COMPONENT HANDLERS
   const typing = async(e) => {
 
     setSearchQuery(e.target.value)
 
-    if(e.target.value) {
+    if(e.target.value !== '') {
 
       const searchedBooks = await search(e.target.value, 30)
 
-      if(searchedBooks.length) {
+      if(searchedBooks && searchedBooks.length) {
 
         await searchedBooks.forEach(searchedBook => {
 
@@ -58,7 +58,12 @@ const Search = () => {
 
     } else {
 
-      setViewedBooks([])
+      
+      setTimeout(() => {
+
+        setViewedBooks([])
+
+      }, 300)
 
     }
 
@@ -87,13 +92,13 @@ const Search = () => {
           placeholder="Search Books"
           value={searchQuery}
           onChange={(e) => typing(e)}
-          />
+        />
 
       </div>
 
       <div className="searchResults">
 
-        {viewedBooks.length ? 
+        {viewedBooks && viewedBooks.length ? 
 
           <>
 
